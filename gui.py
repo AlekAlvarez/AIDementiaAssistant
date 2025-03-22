@@ -10,7 +10,7 @@ class PatientInfoApp:
 
         # Set a consistent theme across platforms
         style = ttk.Style()
-        style.theme_use("clam")  # 'clam' theme is quite consistent across platforms
+        style.theme_use("alt")
 
         # Label and Family Members Section
         self.family_frame = ttk.LabelFrame(root, text="Family Info", padding=(10, 5))
