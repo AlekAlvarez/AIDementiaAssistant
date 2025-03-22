@@ -5,13 +5,13 @@ from SpeechToText import listen
 my_api_key = os.getenv('GEN_AI_API_KEY')
 client = genai.Client(api_key=my_api_key)
 chat = client.chats.create(model="gemini-2.0-flash")
-conv_history=[]
+conv_history=["The patient's brother is away for the day"]
 while 1==1:
     listen()
     req=""
     with open("transcribed_text.txt") as file:
         req=file.read()
-    pen("transcribed_text.txt", 'w').close()
+    open("transcribed_text.txt", 'w').close()
     response = client.models.generate_content(
     model="gemini-2.0-flash",
     contents=[req],
