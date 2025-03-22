@@ -5,7 +5,7 @@ class PatientInfoApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Patient Info Form")
-        self.root.geometry("500x600")
+        self.root.geometry("500x700")
 
         # Label and Family Members Section
         self.family_frame = tk.LabelFrame(root, text="Family Info", padx=10, pady=10)
@@ -54,6 +54,17 @@ class PatientInfoApp:
         self.modification_textbox = tk.Text(root, height=5, width=40)
         self.modification_textbox.pack(padx=10, pady=5)
 
+        # Mood Trends Section
+        self.mood_label = tk.Label(root, text="Current Mood:")
+        self.mood_label.pack(padx=10, pady=5)
+
+        self.mood_var = tk.StringVar(value="Neutral")  # Default value
+        self.mood_dropdown = tk.OptionMenu(root, self.mood_var, "Disturbed", "Neutral", "Cheerful")
+        self.mood_dropdown.pack(padx=10, pady=5)
+
+        self.mood_button = tk.Button(root, text="Set Mood", command=self.check_mood)
+        self.mood_button.pack(pady=5)
+
         # Save Button
         self.save_button = tk.Button(root, text="Save", command=self.save_info)
         self.save_button.pack(pady=10)
@@ -100,6 +111,11 @@ class PatientInfoApp:
         for language in self.languages:
             self.language_dropdown['menu'].add_command(label=language, command=tk._setit(self.language_var, language))
 
+    def check_mood(self):
+        current_mood = self.mood_var.get()
+        if current_mood == "Disturbed":
+            messagebox.showwarning("Assistance Required", "The patient needs assistance!")
+
     def save_info(self):
         # Save patient info to a file or process it as needed
         family_members = "\n".join(self.family_listbox.get(0, tk.END))
@@ -107,13 +123,15 @@ class PatientInfoApp:
         hobbies = self.hobbies_entry.get("1.0", tk.END).strip()
         language = self.language_var.get()  # Get the selected language
         modification_request = self.modification_textbox.get("1.0", tk.END).strip()
+        mood = self.mood_var.get()  # Get the selected mood
 
         with open("patient_info.txt", "w") as file:
             file.write(f"Family Members:\n{family_members}\n\n")
             file.write(f"Current Medications:\n{medications}\n\n")
             file.write(f"Hobbies:\n{hobbies}\n\n")
             file.write(f"Languages Spoken: {language}\n\n")
-            file.write(f"Modification Request:\n{modification_request}\n")
+            file.write(f"Modification Request:\n{modification_request}\n\n")
+            file.write(f"Current Mood: {mood}\n")
 
         messagebox.showinfo("Saved", "Patient information has been saved successfully!")
 
