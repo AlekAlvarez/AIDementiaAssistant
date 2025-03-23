@@ -46,6 +46,9 @@
       }
         if(json["mood"]!=""){
             document.getElementById('mood').value=json["mood"]
+            if(json["mood"]=='Disturbed'){
+              alert("The patient is disturbed")
+            }
       }
     } catch (error) {
       console.error(error.message);
