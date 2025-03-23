@@ -14,4 +14,4 @@ def playText(textToConvert,language='en'):
     print("hi")
     p = vlc.MediaPlayer("ThrowAway.mp3")
     p.play()
-    time.sleep(duration*2)
+    time.sleep(duration*3)

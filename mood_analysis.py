@@ -17,36 +17,3 @@ def analyze_sentiment(text):
         sentiment_category = "Cheerful"
 
     return polarity, sentiment_category  # Return both polarity and category
-
-def read_file(file_path):
-    """
-    Reads text from a file.
-    """
-    with open(file_path, 'r') as file:
-        return file.read()
-
-def save_to_json(data, file_name):
-    """
-    Saves data to a JSON file.
-    """
-    with open(file_name, 'w') as json_file:
-        json.dump(data, json_file, indent=4)
-
-# Example usage
-file_path = 'transcribed_text.txt'  # Change this to your text file path
-json_output_path = 'mood_analysis.json'  # Output JSON file
-
-# Read text from the file
-text_from_file = read_file(file_path)
-
-# Get sentiment polarity and category
-polarity, sentiment_category = analyze_sentiment(text_from_file)
-
-# Save to JSON
-mood_data = {
-    "polarity": polarity,
-    "sentiment": sentiment_category
-}
-save_to_json(mood_data, json_output_path)
-
-print(f"Sentiment analysis saved to {json_output_path}")
