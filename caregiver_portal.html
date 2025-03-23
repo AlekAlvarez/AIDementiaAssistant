@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Patient Info Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        label { display: block; margin-top: 10px; }
+        textarea, input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        .section {margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
+        button { background-color: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Patient Info Form</h1>
+
+    <div class="section">
+        <label>Family Members:</label>
+        <textarea id="family-members"></textarea>
+    </div>
+
+    <div class="section">
+        <label>Current Medications:</label>
+        <textarea id="medications"></textarea>
+    </div>
+
+    <div class="section">
+        <label>Hobbies:</label>
+        <textarea id="hobbies"></textarea>
+    </div>
+
+    <div class="section">
+        <label>Languages Patient Speaks:</label>
+        <input type="text" id="new-language" placeholder="Add language">
+        <button onclick="addLanguage()">Add Language</button>
+        <textarea id="language-list" readonly></textarea>
+    </div>
+
+    <div class="section">
+        <label>Patient Modification Request:</label>
+        <textarea id="modification-request"></textarea>
+    </div>
+
+    <div class="section">
+        <label>Current Mood:</label>
+        <input type="text" id="mood" placeholder="Enter mood">
+    </div>
+
+    <button onclick="saveInfo()">Save</button>
+
+    <script>
+        const languages = [];
+
+        function addLanguage() {
+            const newLanguage = document.getElementById('new-language').value.trim();
+            if (newLanguage && !languages.includes(newLanguage)) {
+                languages.push(newLanguage);
+                document.getElementById('language-list').value = languages.map(lang => `• ${lang}`).join('\n');
+                document.getElementById('new-language').value = "";
+            } else {
+                alert("Language already exists or is empty.");
+            }
+        }
+
+        function saveInfo() {
+            const patientData = {
+                familyMembers: document.getElementById('family-members').value.trim(),
+                medications: document.getElementById('medications').value.trim(),
+                hobbies: document.getElementById('hobbies').value.trim(),
+                languagesSpoken: languages,
+                modificationRequest: document.getElementById('modification-request').value.trim(),
+                mood: document.getElementById('mood').value.trim().toLowerCase()
+            };
+
+            if (patientData.mood === "disturbed") {
+                alert("Assistant is needed. The patient is distressed.");
+            }
+
+            const jsonData = JSON.stringify(patientData, null, 2);
+            const blob = new Blob([jsonData], { type: "application/json" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "patient_info.json";
+            a.click();
+
+            alert("Patient information has been saved successfully!");
+        }
+    </script>
+</body>
+</html>
