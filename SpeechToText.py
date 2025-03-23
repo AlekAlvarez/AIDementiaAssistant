@@ -20,9 +20,11 @@ def listen():
                 audio = r.listen(source)
                 
                 # Recognize speech using Google Speech Recognition
-                text = r.recognize_google(audio)
-                print("Transcription: " + text)
-
+                try:
+                    text = r.recognize_google(audio)
+                    print("Transcription: " + text)
+                except:
+                    continue
                 # Save the transcribed text into a .txt file (append mode to avoid overwriting)
                 with open("transcribed_text.txt", "a") as text_file:
                     text_file.write(text + "\n")  # Write the text into the file with a newline, this text file 

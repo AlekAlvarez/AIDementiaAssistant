@@ -7,15 +7,14 @@ from google.genai import types
 my_api_key = os.getenv('GEN_AI_API_KEY')
 client = genai.Client(api_key=my_api_key)
 chat = client.chats.create(model="gemini-2.0-flash")
-conv_history="In his anger he pushed Padme his wife away"
-patientName="Anakin"
+conv_history=""
+patientName="Patient"
 while 1==1:
-    #listen() TODO
+    listen()
     req=""
     with open("transcribed_text.txt") as file:
         req=file.read()
     open("transcribed_text.txt", 'w').close()
-    req=input()
     response = client.models.generate_content(
     model="gemini-2.0-flash",
     contents=["Doctors info follows: ",conv_history,"what follows is a patient question", req],
