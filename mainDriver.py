@@ -12,6 +12,7 @@ gConv=""
 file=open("flaskData.json")
 gD=json.load(file)
 file.close()
+talking=False
 gConv="Doctors Notes: Family Member INFO: "+gD["familyMembers"]+"Patient Hobbies: "+gD["hobbies"]
 gConv+="Medications: "+gD["medications"]
 gPatient=gD['patientName']
@@ -36,7 +37,9 @@ def nlp():
             ,max_output_tokens=100,
             temperature=0.5)
         )
-        playText(response) 
+        talking=True
+        playText(response.text) 
+        talking=False
         tup=analyze_sentiment(req)
         sentiment_category=tup[1]
         newInfo=client.models.generate_content(
@@ -72,12 +75,16 @@ def load_data():
 def api_data():
     # Access data sent as JSON in the body of the request
     data = request.get_json()  # Parse the incoming JSON data
+    while(talking):
+        time.sleep(5)
     with open('flaskData.json', 'w') as f:
         json.dump(data, f)
     result={"transmitted":True}
     return jsonify(result)
 @app.route("/DataToPortal")
 def get_data():
+    while(talking):
+        time.sleep(5)
     file=open("patientInterfaceData.json")
     result=json.load(file)
     file.close()

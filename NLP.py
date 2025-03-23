@@ -52,4 +52,5 @@ def nlp():
             json.dump(d,f)
         print(sentiment_category)
         print(response.text)
-nlp()
+if __name__ == '__main__':
+    nlp()
