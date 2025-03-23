@@ -10,70 +10,76 @@ class PatientInfoApp:
 
         # Set a consistent theme across platforms
         style = ttk.Style()
-        #style.theme_use("clam")  # 'clam' theme is quite consistent across platforms
+<<<<<<< HEAD
+        style.theme_use("clam")  # 'clam' theme is quite consistent across platforms
+=======
         style.theme_use("alt")
+>>>>>>> 79522d24762f2e6ed04bcf0ddaabae30d6109228
 
         # Label and Family Members Section
         self.family_frame = ttk.LabelFrame(root, text="Family Info", padding=(10, 5))
-        self.family_frame.pack(fill="both", expand=True, padx=10, pady=5)
+        self.family_frame.grid(row=0, column=0, padx=10, pady=5, sticky="ew")
 
         self.family_listbox = tk.Listbox(self.family_frame, height=4, selectmode=tk.SINGLE)
-        self.family_listbox.pack(padx=10, pady=5, fill="both")
+        self.family_listbox.grid(row=0, column=0, padx=10, pady=5, sticky="ew")
+
         self.add_family_button = ttk.Button(self.family_frame, text="Add Family Member", command=self.add_family_member)
-        self.add_family_button.pack(pady=5)
+        self.add_family_button.grid(row=1, column=0, pady=5)
 
-        # Medications
+        # Medications Section
         self.medications_label = ttk.Label(root, text="Current Medications:")
-        self.medications_label.pack(padx=10, pady=5)
-        self.medications_entry = tk.Text(root, height=4, width=40)
-        self.medications_entry.pack(padx=10, pady=5)
+        self.medications_label.grid(row=1, column=0, padx=10, pady=5)
 
-        # Hobbies
+        self.medications_entry = tk.Text(root, height=4, width=40)
+        self.medications_entry.grid(row=2, column=0, padx=10, pady=5)
+
+        # Hobbies Section
         self.hobbies_label = ttk.Label(root, text="Hobbies:")
-        self.hobbies_label.pack(padx=10, pady=5)
+        self.hobbies_label.grid(row=3, column=0, padx=10, pady=5)
+
         self.hobbies_entry = tk.Text(root, height=4, width=40)
-        self.hobbies_entry.pack(padx=10, pady=5)
+        self.hobbies_entry.grid(row=4, column=0, padx=10, pady=5)
 
         # Language Setting Section
         self.language_label = ttk.Label(root, text="Languages Patient Speaks:")
-        self.language_label.pack(padx=10, pady=5)
+        self.language_label.grid(row=5, column=0, padx=10, pady=5)
 
-        # Empty list of languages initially
         self.languages = []
 
-        # Create the dropdown menu (start with an initial value)
-        self.language_var = tk.StringVar(value="Select Language")  # Default value
+        self.language_var = tk.StringVar(value="Select Language")
         self.language_dropdown = ttk.OptionMenu(root, self.language_var, "Select Language")
-        self.language_dropdown.pack(padx=10, pady=5)
+        self.language_dropdown.grid(row=6, column=0, padx=10, pady=5)
 
-        # Input to add new language
         self.new_language_entry = ttk.Entry(root)
-        self.new_language_entry.pack(padx=10, pady=5)
+        self.new_language_entry.grid(row=7, column=0, padx=10, pady=5)
 
         self.add_language_button = ttk.Button(root, text="Add Language", command=self.add_language)
-        self.add_language_button.pack(pady=5)
+        self.add_language_button.grid(row=8, column=0, pady=5)
 
         # Patient Modification Request Section
         self.modification_label = ttk.Label(root, text="Patient Modification Request:")
-        self.modification_label.pack(padx=10, pady=5)
+        self.modification_label.grid(row=9, column=0, padx=10, pady=5)
 
         self.modification_textbox = tk.Text(root, height=5, width=40)
-        self.modification_textbox.pack(padx=10, pady=5)
+        self.modification_textbox.grid(row=10, column=0, padx=10, pady=5)
 
         # Mood Trends Section
         self.mood_label = ttk.Label(root, text="Current Mood:")
-        self.mood_label.pack(padx=10, pady=5)
+        self.mood_label.grid(row=11, column=0, padx=10, pady=5)
 
-        self.mood_var = tk.StringVar(value="Neutral")  # Default value
+        self.mood_var = tk.StringVar(value="Neutral")
         self.mood_dropdown = ttk.OptionMenu(root, self.mood_var, "Disturbed", "Neutral", "Cheerful")
-        self.mood_dropdown.pack(padx=10, pady=5)
+        self.mood_dropdown.grid(row=12, column=0, padx=10, pady=5)
 
         self.mood_button = ttk.Button(root, text="Set Mood", command=self.check_mood)
-        self.mood_button.pack(pady=5)
+        self.mood_button.grid(row=13, column=0, pady=5)
 
         # Save Button
         self.save_button = ttk.Button(root, text="Save", command=self.save_info)
-        self.save_button.pack(pady=10)
+        self.save_button.grid(row=14, column=0, pady=10)
+
+        # Force the window to update its layout and render
+        self.root.update()
 
     def add_family_member(self):
         # Create a new family member entry
