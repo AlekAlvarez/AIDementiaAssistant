@@ -31,7 +31,7 @@
             })
             alert("Data is Saved To Server");
         }
-        setInterval(checkData, 5000);
+        setInterval(checkData, 10000);
         async function checkData(){
             const url = "http://localhost:5000/DataToPortal";
     try {
