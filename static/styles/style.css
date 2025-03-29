@@ -1,8 +1,8 @@
 body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; align-items: center;}
         label { display: block; margin-top: 10px; }
-        textarea, input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        textarea, input, select { width: 90%; padding: 8px; margin-top: 5px; }
         .section {margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px; }
         button { background-color: #4CAF50; color: white; border: none; padding: 10px 20px; cursor: pointer;}
-        button:hover { background-color: #45a049; }
+        button:hover { background-color: #275329; }
 div{margin-left: auto;margin-right: auto; text-align: center;}
-h1{text-align: center;}
+h1{text-align: center;border:1px solid, black;border-radius: 5px; }

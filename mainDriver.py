@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, request, jsonify
+from flask import Flask, render_template, json, request, jsonify, redirect, url_for
 from flask_cors import CORS
 from google import genai
 import os
@@ -9,6 +9,7 @@ from google.genai import types
 import threading
 import time
 gConv=""
+login=False
 file=open("flaskData.json")
 gD=json.load(file)
 file.close()
@@ -81,6 +82,13 @@ def api_data():
         json.dump(data, f)
     result={"transmitted":True}
     return jsonify(result)
+@app.route("/login", methods=['POST'])
+def login():
+    data=request.get_json()
+    print(data)
+    login=True
+    print("what is wrong")
+    return render_template("portal.html")
 @app.route("/DataToPortal")
 def get_data():
     while(talking):
